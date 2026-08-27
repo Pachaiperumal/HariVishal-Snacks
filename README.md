@@ -4,6 +4,13 @@
 npm install
 npm run dev
 
+The project is split into two folders:
+
+- `frontend/` - React and Vite storefront
+- `backend/` - Node API service
+
+Run the backend separately with `npm run backend`. Its health endpoint is available at `http://localhost:4000/api/health`.
+
 ## Build
 npm run build
 
