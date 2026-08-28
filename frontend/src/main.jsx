@@ -1,14 +1,14 @@
 import React, { useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ShoppingCart, Menu, X, Phone, Mail, MapPin, Plus, Minus, Trash2, ArrowRight, Sparkles, ShieldCheck, Truck } from 'lucide-react'
+import { ShoppingCart, Menu, X, Phone, Mail, MessageCircle, Plus, Minus, Trash2, ArrowRight, Sparkles, ShieldCheck, Truck } from 'lucide-react'
 import './style.css'
 
 const products = [
-  { id: 1, name: 'Mixture', emoji: '🥜', description: 'A crunchy, spicy South Indian snack blend.' },
-  { id: 2, name: 'Omapodi', emoji: '🍜', description: 'Thin, crispy and delicious traditional sev.' },
-  { id: 3, name: 'Murukku', emoji: '🥨', description: 'Classic spiral-shaped crunchy snack.' },
-  { id: 4, name: 'Mani Kara Boondhi', emoji: '🟠', description: 'Tiny, crunchy and perfectly spiced boondhi.' },
-  { id: 5, name: 'Ola Pakoda', emoji: '🌶️', description: 'Crispy, spicy and full of traditional flavour.' },
+  { id: 1, name: 'Mixer', emoji: '🥜', image: 'https://www.sharmispassions.com/wp-content/uploads/2012/11/south-indian-mixture9.jpg?v=3', alt: 'Mixer', weights: ['250g', '500g', '1kg'], description: 'A crunchy, spicy South Indian snack blend.' },
+  { id: 2, name: 'Omapodi', emoji: '🍜', image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2022/10/sev-recipe-omapodi-karapusa.jpg?v=4', description: 'Thin, crispy and delicious traditional sev.' },
+  { id: 3, name: 'Murukku', emoji: '🥨', image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2021/12/butter-murukku-recipe.jpg?v=2', description: 'Classic spiral-shaped crunchy snack.' },
+  { id: 4, name: 'Mani Kara Boondhi', emoji: '🟠', image: 'https://www.sharmispassions.com/wp-content/uploads/2012/11/kara-boondi4.jpg?v=2', description: 'Tiny, crunchy and perfectly spiced boondhi.' },
+  { id: 5, name: 'Ola Pakoda', emoji: '🌶️', image: 'https://www.sharmispassions.com/wp-content/uploads/2022/10/ribbon-pakoda5.jpg?v=2', description: 'Crispy, spicy and full of traditional flavour.' },
 ]
 
 const prices = { '250g': 90, '500g': 180, '1kg': 360 }
@@ -85,12 +85,8 @@ function App() {
             </div>
           </div>
 
-          <div className="snack-showcase" aria-label="Snack display">
-            <div className="floating snack a">🥨<span>Murukku</span></div>
-            <div className="floating snack b">🥜<span>Mixture</span></div>
-            <div className="center-bowl">🧺<div><b>Freshly Made</b><small>Premium Quality</small></div></div>
-            <div className="floating snack c">🍜<span>Omapodi</span></div>
-            <div className="floating snack d">🌶️<span>Pakoda</span></div>
+          <div className="snack-showcase" aria-label="Traditional South Indian snacks">
+            <img className="hero-snack-photo" src="https://www.sharmispassions.com/wp-content/uploads/2012/11/south-indian-mixture9.jpg?v=5" alt="Traditional South Indian snacks" />
           </div>
         </section>
 
@@ -121,14 +117,14 @@ function App() {
               return (
                 <article className="product-card" key={product.id}>
                   <div className={`product-image p${index + 1}`}>
-                    <span className="product-emoji">{product.emoji}</span>
+                    <img className="product-photo" src={product.image} alt={product.alt || product.name} />
                     <span className="fresh-tag">Fresh Snack</span>
                   </div>
                   <div className="product-info">
                     <h3>{product.name}</h3>
                     <p>{product.description}</p>
                     <div className="weight-options">
-                      {Object.keys(prices).map(w => (
+                      {(product.weights || Object.keys(prices)).map(w => (
                         <button
                           key={w}
                           className={weight === w ? 'active' : ''}
@@ -149,14 +145,14 @@ function App() {
 
         <section id="about" className="about">
           <div className="about-visual">
-            <div className="big-snack">🌶️</div>
+            <img className="about-photo" src="https://www.sharmispassions.com/wp-content/uploads/2012/11/south-indian-mixture9.jpg?v=4" alt="Traditional South Indian snacks" />
             <div className="taste-card"><b>Made for Snack Lovers</b><span>Fresh • Crunchy • Spicy</span></div>
           </div>
           <div className="about-copy">
             <span className="eyebrow">ABOUT HARI VISHAL SNACKS</span>
             <h2>Traditional Flavour, Made With Love.</h2>
             <p>Hari Vishal Snacks brings together the comfort of traditional South Indian recipes and a clean, modern snacking experience.</p>
-            <p>From crunchy mixture and omapodi to murukku and spicy kara boondhi, our focus is simple: delicious snacks with authentic taste and premium quality.</p>
+            <p>From crunchy mixer and omapodi to murukku and spicy kara boondhi, our focus is simple: delicious snacks with authentic taste and premium quality.</p>
             <div className="stats">
               <div><b>5</b><span>Signature Snacks</span></div>
               <div><b>100%</b><span>Love for Taste</span></div>
@@ -169,14 +165,10 @@ function App() {
           <div className="contact-box">
             <span className="eyebrow">GET IN TOUCH</span>
             <h2>Let's Talk Snacks</h2>
-            <p>Have a question or want to know more about Hari Vishal Snacks? Contact us directly.</p>
-            <a href="tel:+919080414539"><Phone size={20}/> +91 9080414539</a>
-            <a href="mailto:pachaiperumal591813@gmail.com"><Mail size={20}/> pachaiperumal591813@gmail.com</a>
-          </div>
-          <div className="contact-side">
-            <div className="contact-icon"><MapPin size={34}/></div>
-            <h3>Fresh South Indian Snacks</h3>
-            <p>Simple, tasty and ready to grow into a full online snack store.</p>
+            <p>Have a question or want to order fresh snacks? Contact us directly.</p>
+            <a className="contact-action" href="tel:+919080414539"><Phone size={20}/> Call us</a>
+            <a className="contact-action" href="https://wa.me/919080414539" target="_blank" rel="noreferrer"><MessageCircle size={20}/> WhatsApp us</a>
+            <a className="contact-action" href="mailto:pachaiperumal591813@gmail.com"><Mail size={20}/> Email us</a>
             <button className="primary" onClick={() => scrollTo('products')}>Explore Products</button>
           </div>
         </section>
