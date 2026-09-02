@@ -17,9 +17,8 @@ const upiApps = [
   { id: 'gpay', label: 'Google Pay', logo: 'https://cdn.simpleicons.org/googlepay', packageName: 'com.google.android.apps.nbu.paisa.user' },
   { id: 'phonepe', label: 'PhonePe', logo: 'https://cdn.simpleicons.org/phonepe', packageName: 'com.phonepe.app' },
   { id: 'paytm', label: 'Paytm', logo: 'https://cdn.simpleicons.org/paytm', packageName: 'net.one97.paytm' },
-  { id: 'amazonpay', label: 'Amazon Pay', logo: 'https://cdn.simpleicons.org/amazonpay', packageName: 'in.amazon.mShop.android.shopping' },
-  { id: 'bhim', label: 'BHIM', logo: 'https://cdn.simpleicons.org/bhim', packageName: 'in.org.npci.upiapp' },
-  { id: 'supermoney', label: 'Super Money', logo: 'https://cdn.simpleicons.org/supermoney', scheme: 'supermoney' },
+  { id: 'amazonpay', label: 'Amazon Pay', mark: 'pay', packageName: 'in.amazon.mShop.android.shopping' },
+  { id: 'supermoney', label: 'Super Money', mark: 'super.money', scheme: 'supermoney' },
   { id: 'other', label: 'Others', icon: '+', chooser: true },
 ]
 
@@ -246,7 +245,7 @@ function App() {
                   <div className="upi-app-tiles">
                     {upiApps.map(app => (
                       <button type="button" className={upiApp === app.id ? 'selected' : ''} key={app.id} onClick={() => setUpiApp(app.id)}>
-                        <span className={`upi-tile-icon ${app.id}`}>{app.logo ? <img src={app.logo} alt="" /> : app.icon}</span>
+                        <span className={`upi-tile-icon ${app.id}`}>{app.logo ? <img src={app.logo} alt="" /> : app.mark || app.icon}</span>
                         <span>{app.label}</span>
                       </button>
                     ))}
