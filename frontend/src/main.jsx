@@ -37,6 +37,7 @@ function App() {
       ? `intent://pay?${query}#Intent;scheme=upi;package=${app.packageName};end`
       : `${app.scheme}?${query}`
   }
+  const chooseUpiApp = () => document.querySelector('.upi-app-buttons')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 
   const addToCart = (product) => {
     const weight = selectedWeight[product.id] || '250g'
@@ -246,9 +247,9 @@ function App() {
                 </div>
               )}
               <button className="primary checkout-btn" onClick={() => {
-                if (paymentMethod === 'upi') window.location.href = paymentLink
+                if (paymentMethod === 'upi') chooseUpiApp()
                 else alert(`Order request received for ₹${total}. We will confirm payment details on WhatsApp.`)
-              }}>{paymentMethod === 'upi' ? <><span>Pay with UPI</span><span className="checkout-apps" aria-label="Google Pay, PhonePe, Super Money and Paytm"><i className="google-pay">G</i><i className="phonepe">पे</i><i className="super-money">S</i><i className="paytm">P</i></span></> : paymentMethod === 'cod' ? 'Place COD Order' : 'Place Order'}</button>
+              }}>{paymentMethod === 'upi' ? <><span>Choose UPI App</span><span className="checkout-apps" aria-label="Google Pay, PhonePe, Super Money and Paytm"><i className="google-pay">G</i><i className="phonepe">पे</i><i className="super-money">S</i><i className="paytm">P</i></span></> : paymentMethod === 'cod' ? 'Place COD Order' : 'Place Order'}</button>
             </div>
           </>
         )}
