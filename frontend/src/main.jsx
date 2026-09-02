@@ -14,7 +14,7 @@ const products = [
 const prices = { '250g': 90, '500g': 180, '1kg': 360 }
 const paymentUpiId = 'kingvishalpachai@oksbi'
 const upiApps = [
-  { id: 'gpay', label: 'Google Pay', logo: 'https://cdn.simpleicons.org/googlepay', packageName: 'com.google.android.apps.nbu.paisa.user' },
+  { id: 'gpay', label: 'Google Pay', logo: 'https://pay.google.com/about/static_kcs/images/logos/GPay-logo-en_in.svg', packageName: 'com.google.android.apps.nbu.paisa.user' },
   { id: 'phonepe', label: 'PhonePe', logo: 'https://cdn.simpleicons.org/phonepe', packageName: 'com.phonepe.app' },
   { id: 'paytm', label: 'Paytm', logo: 'https://cdn.simpleicons.org/paytm', packageName: 'net.one97.paytm' },
   { id: 'amazonpay', label: 'Amazon Pay', mark: 'pay', packageName: 'in.amazon.mShop.android.shopping' },
