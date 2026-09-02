@@ -13,13 +13,13 @@ const products = [
 
 const prices = { '250g': 90, '500g': 180, '1kg': 360 }
 const paymentUpiId = 'kingvishalpachai@oksbi'
-const upiApps = {
-  other: { label: 'Other UPI app', scheme: 'upi' },
-  gpay: { label: 'Google Pay', scheme: 'upi', packageName: 'com.google.android.apps.nbu.paisa.user' },
-  phonepe: { label: 'PhonePe', scheme: 'upi', packageName: 'com.phonepe.app' },
-  supermoney: { label: 'Super Money', scheme: 'supermoney' },
-  paytm: { label: 'Paytm', scheme: 'upi', packageName: 'net.one97.paytm' },
-}
+const upiApps = [
+  { id: 'gpay', label: 'Google Pay', icon: 'G', packageName: 'com.google.android.apps.nbu.paisa.user' },
+  { id: 'phonepe', label: 'PhonePe', icon: 'पे', packageName: 'com.phonepe.app' },
+  { id: 'paytm', label: 'Paytm', icon: 'P', packageName: 'net.one97.paytm' },
+  { id: 'supermoney', label: 'Super Money', icon: 'S', scheme: 'supermoney' },
+  { id: 'other', label: 'Others', icon: '+', chooser: true },
+]
 
 function App() {
   const [cart, setCart] = useState([])
@@ -33,10 +33,12 @@ function App() {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const paymentLink = `upi://pay?pa=${paymentUpiId}&pn=Hari%20Vishal%20Snacks&am=${total}&cu=INR`
   const upiChooserLink = `intent://pay?${paymentLink.split('?')[1]}#Intent;scheme=upi;end`
-  const selectedUpiApp = upiApps[upiApp]
-  const selectedPaymentLink = selectedUpiApp.packageName
-    ? `intent://pay?${paymentLink.split('?')[1]}#Intent;scheme=${selectedUpiApp.scheme};package=${selectedUpiApp.packageName};end`
-    : `${selectedUpiApp.scheme}://pay?${paymentLink.split('?')[1]}`
+  const selectedUpiApp = upiApps.find(app => app.id === upiApp)
+  const selectedPaymentLink = selectedUpiApp.chooser
+    ? `intent://pay?${paymentLink.split('?')[1]}#Intent;scheme=upi;end`
+    : selectedUpiApp.packageName
+      ? `intent://pay?${paymentLink.split('?')[1]}#Intent;scheme=upi;package=${selectedUpiApp.packageName};end`
+      : `${selectedUpiApp.scheme}://upi/pay?${paymentLink.split('?')[1]}`
   const paymentQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=${encodeURIComponent(selectedPaymentLink)}`
 
   const addToCart = (product) => {
@@ -238,10 +240,15 @@ function App() {
                   <img src={paymentQrUrl} alt={`Scan to pay ₹${total} using UPI`} />
                   <b>Scan to pay ₹{total}</b>
                   <span>UPI ID: {paymentUpiId}</span>
-                  <label className="payment-label" htmlFor="upi-app">Choose UPI app</label>
-                  <select id="upi-app" value={upiApp} onChange={event => setUpiApp(event.target.value)}>
-                    {Object.entries(upiApps).map(([value, app]) => <option value={value} key={value}>{app.label}</option>)}
-                  </select>
+                  <small className="payment-app-heading">Pay with</small>
+                  <div className="upi-app-tiles">
+                    {upiApps.map(app => (
+                      <button type="button" className={upiApp === app.id ? 'selected' : ''} key={app.id} onClick={() => setUpiApp(app.id)}>
+                        <span className={`upi-tile-icon ${app.id}`}>{app.icon}</span>
+                        <span>{app.label}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
               <button className="primary checkout-btn" onClick={() => {
