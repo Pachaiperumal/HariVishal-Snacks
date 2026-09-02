@@ -18,7 +18,7 @@ const upiApps = [
   { id: 'phonepe', label: 'PhonePe', logo: 'https://cdn.simpleicons.org/phonepe', packageName: 'com.phonepe.app' },
   { id: 'paytm', label: 'Paytm', logo: 'https://cdn.simpleicons.org/paytm', packageName: 'net.one97.paytm' },
   { id: 'amazonpay', label: 'Amazon Pay', mark: 'pay', packageName: 'in.amazon.mShop.android.shopping' },
-  { id: 'supermoney', label: 'Super Money', mark: 'super.money', scheme: 'supermoney' },
+  { id: 'supermoney', label: 'Super Money', logo: 'https://super.money/img/super-money-logo-color.svg', scheme: 'supermoney' },
   { id: 'other', label: 'Others', icon: '+', chooser: true },
 ]
 

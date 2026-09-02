@@ -37,7 +37,7 @@ footer{background:#11120f}.cart-drawer{background:#f8f9f5}.cart-header{border-bo
 @media(max-width:720px){.checkout-btn{position:fixed;right:0;bottom:0;width:100%;z-index:5;border-radius:14px 14px 0 0;padding-bottom:calc(14px + env(safe-area-inset-bottom));box-shadow:0 -8px 24px rgba(45,27,19,.16)}}
 @media(max-width:720px){.cart-drawer{display:block;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.cart-items{overflow:visible;max-height:none}.checkout{padding-bottom:90px}}
 @media(max-width:720px){.nav{background:#eef0ea;border-bottom-color:#d8dad1}}
-.upi-tile-icon img{width:28px;height:28px;object-fit:contain}.upi-tile-icon.gpay,.upi-tile-icon.phonepe,.upi-tile-icon.paytm{background:#fff}.upi-tile-icon.supermoney img{filter:invert(1)}
+.upi-tile-icon img{width:28px;height:28px;object-fit:contain}.upi-tile-icon.gpay,.upi-tile-icon.phonepe,.upi-tile-icon.paytm,.upi-tile-icon.supermoney{background:#fff}
 .upi-app-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}.upi-app-tiles button{width:100%;min-width:0}
 .upi-tile-icon.amazonpay{width:52px;background:#fff;color:#111;font-size:18px;font-family:Georgia,serif}.upi-tile-icon.amazonpay::after{content:'';width:26px;height:3px;position:absolute;margin-top:25px;border-radius:50%;background:#ff9900;transform:rotate(-8deg)}.upi-tile-icon.supermoney{font-size:8px;letter-spacing:-.3px}
 
