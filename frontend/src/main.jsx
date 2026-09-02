@@ -14,10 +14,10 @@ const products = [
 const prices = { '250g': 90, '500g': 180, '1kg': 360 }
 const paymentUpiId = 'kingvishalpachai@oksbi'
 const paymentApps = [
-  { name: 'Google Pay', scheme: 'gpay://upi/pay' },
-  { name: 'PhonePe', scheme: 'phonepe://pay' },
+  { name: 'Google Pay', scheme: 'gpay://upi/pay', packageName: 'com.google.android.apps.nbu.paisa.user' },
+  { name: 'PhonePe', scheme: 'phonepe://pay', packageName: 'com.phonepe.app' },
   { name: 'Super Money', scheme: 'supermoney://upi/pay' },
-  { name: 'Paytm', scheme: 'paytmmp://pay' },
+  { name: 'Paytm', scheme: 'paytmmp://pay', packageName: 'net.one97.paytm' },
 ]
 
 function App() {
@@ -31,7 +31,12 @@ function App() {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const paymentLink = `upi://pay?pa=${paymentUpiId}&pn=Hari%20Vishal%20Snacks&am=${total}&cu=INR`
   const paymentQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=${encodeURIComponent(paymentLink)}`
-  const appPaymentLink = (scheme) => `${scheme}?${paymentLink.split('?')[1]}`
+  const appPaymentLink = (app) => {
+    const query = paymentLink.split('?')[1]
+    return app.packageName
+      ? `intent://upi/pay?${query}#Intent;scheme=upi;package=${app.packageName};end`
+      : `${app.scheme}?${query}`
+  }
 
   const addToCart = (product) => {
     const weight = selectedWeight[product.id] || '250g'
@@ -235,7 +240,7 @@ function App() {
                   <small className="payment-app-heading">Choose a payment app</small>
                   <div className="upi-app-buttons">
                     {paymentApps.map(app => (
-                      <button type="button" key={app.name} onClick={() => window.location.href = appPaymentLink(app.scheme)}>{app.name}</button>
+                      <button type="button" key={app.name} onClick={() => window.location.href = appPaymentLink(app)}>{app.name}</button>
                     ))}
                   </div>
                 </div>
