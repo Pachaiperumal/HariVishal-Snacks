@@ -34,7 +34,7 @@ function App() {
   const appPaymentLink = (app) => {
     const query = paymentLink.split('?')[1]
     return app.packageName
-      ? `intent://upi/pay?${query}#Intent;scheme=upi;package=${app.packageName};end`
+      ? `intent://pay?${query}#Intent;scheme=upi;package=${app.packageName};end`
       : `${app.scheme}?${query}`
   }
 
