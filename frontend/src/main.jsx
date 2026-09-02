@@ -24,6 +24,7 @@ function App() {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const paymentLink = `upi://pay?pa=${paymentUpiId}&pn=Hari%20Vishal%20Snacks&am=${total}&cu=INR`
+  const upiChooserLink = `intent://pay?${paymentLink.split('?')[1]}#Intent;scheme=upi;end`
   const paymentQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=${encodeURIComponent(paymentLink)}`
 
   const addToCart = (product) => {
@@ -228,7 +229,7 @@ function App() {
                 </div>
               )}
               <button className="primary checkout-btn" onClick={() => {
-                if (paymentMethod === 'upi') window.location.href = paymentLink
+                if (paymentMethod === 'upi') window.location.href = upiChooserLink
                 else alert(`Order request received for ₹${total}. We will confirm payment details on WhatsApp.`)
               }}>{paymentMethod === 'upi' ? 'Pay with UPI' : paymentMethod === 'cod' ? 'Place COD Order' : 'Place Order'}</button>
             </div>
