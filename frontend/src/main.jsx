@@ -14,10 +14,10 @@ const products = [
 const prices = { '250g': 90, '500g': 180, '1kg': 360 }
 const paymentUpiId = 'kingvishalpachai@oksbi'
 const upiApps = [
-  { id: 'gpay', label: 'Google Pay', icon: 'G', packageName: 'com.google.android.apps.nbu.paisa.user' },
-  { id: 'phonepe', label: 'PhonePe', icon: 'पे', packageName: 'com.phonepe.app' },
-  { id: 'paytm', label: 'Paytm', icon: 'P', packageName: 'net.one97.paytm' },
-  { id: 'supermoney', label: 'Super Money', icon: 'super.money', scheme: 'supermoney' },
+  { id: 'gpay', label: 'Google Pay', logo: 'https://cdn.simpleicons.org/googlepay', packageName: 'com.google.android.apps.nbu.paisa.user' },
+  { id: 'phonepe', label: 'PhonePe', logo: 'https://cdn.simpleicons.org/phonepe', packageName: 'com.phonepe.app' },
+  { id: 'paytm', label: 'Paytm', logo: 'https://cdn.simpleicons.org/paytm', packageName: 'net.one97.paytm' },
+  { id: 'supermoney', label: 'Super Money', logo: 'https://cdn.simpleicons.org/supermoney', scheme: 'supermoney' },
   { id: 'other', label: 'Others', icon: '+', chooser: true },
 ]
 
@@ -244,7 +244,7 @@ function App() {
                   <div className="upi-app-tiles">
                     {upiApps.map(app => (
                       <button type="button" className={upiApp === app.id ? 'selected' : ''} key={app.id} onClick={() => setUpiApp(app.id)}>
-                        <span className={`upi-tile-icon ${app.id}`}>{app.icon}</span>
+                        <span className={`upi-tile-icon ${app.id}`}>{app.logo ? <img src={app.logo} alt="" /> : app.icon}</span>
                         <span>{app.label}</span>
                       </button>
                     ))}
