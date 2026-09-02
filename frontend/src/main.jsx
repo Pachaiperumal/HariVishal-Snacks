@@ -13,12 +13,6 @@ const products = [
 
 const prices = { '250g': 90, '500g': 180, '1kg': 360 }
 const paymentUpiId = 'kingvishalpachai@oksbi'
-const paymentApps = [
-  { name: 'Google Pay', scheme: 'gpay://upi/pay', packageName: 'com.google.android.apps.nbu.paisa.user' },
-  { name: 'PhonePe', scheme: 'phonepe://pay', packageName: 'com.phonepe.app' },
-  { name: 'Super Money', scheme: 'supermoney://upi/pay' },
-  { name: 'Paytm', scheme: 'paytmmp://pay', packageName: 'net.one97.paytm' },
-]
 
 function App() {
   const [cart, setCart] = useState([])
@@ -31,13 +25,6 @@ function App() {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const paymentLink = `upi://pay?pa=${paymentUpiId}&pn=Hari%20Vishal%20Snacks&am=${total}&cu=INR`
   const paymentQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=${encodeURIComponent(paymentLink)}`
-  const appPaymentLink = (app) => {
-    const query = paymentLink.split('?')[1]
-    return app.packageName
-      ? `intent://pay?${query}#Intent;scheme=upi;package=${app.packageName};end`
-      : `${app.scheme}?${query}`
-  }
-  const chooseUpiApp = () => document.querySelector('.upi-app-buttons')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 
   const addToCart = (product) => {
     const weight = selectedWeight[product.id] || '250g'
@@ -238,18 +225,12 @@ function App() {
                   <img src={paymentQrUrl} alt={`Scan to pay ₹${total} using UPI`} />
                   <b>Scan to pay ₹{total}</b>
                   <span>UPI ID: {paymentUpiId}</span>
-                  <small className="payment-app-heading">Choose a payment app</small>
-                  <div className="upi-app-buttons">
-                    {paymentApps.map(app => (
-                      <button type="button" key={app.name} onClick={() => window.location.href = appPaymentLink(app)}>{app.name}</button>
-                    ))}
-                  </div>
                 </div>
               )}
               <button className="primary checkout-btn" onClick={() => {
-                if (paymentMethod === 'upi') chooseUpiApp()
+                if (paymentMethod === 'upi') window.location.href = paymentLink
                 else alert(`Order request received for ₹${total}. We will confirm payment details on WhatsApp.`)
-              }}>{paymentMethod === 'upi' ? <><span>Choose UPI App</span><span className="checkout-apps" aria-label="Google Pay, PhonePe, Super Money and Paytm"><i className="google-pay">G</i><i className="phonepe">पे</i><i className="super-money">S</i><i className="paytm">P</i></span></> : paymentMethod === 'cod' ? 'Place COD Order' : 'Place Order'}</button>
+              }}>{paymentMethod === 'upi' ? 'Pay with UPI' : paymentMethod === 'cod' ? 'Place COD Order' : 'Place Order'}</button>
             </div>
           </>
         )}
