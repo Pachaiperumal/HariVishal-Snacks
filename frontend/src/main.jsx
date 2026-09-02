@@ -30,7 +30,7 @@ function App() {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const paymentLink = `upi://pay?pa=${paymentUpiId}&pn=Hari%20Vishal%20Snacks&am=${total}&cu=INR`
-  const paymentQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=12&data=${encodeURIComponent(paymentLink)}`
+  const paymentQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=${encodeURIComponent(paymentLink)}`
   const appPaymentLink = (scheme) => `${scheme}?${paymentLink.split('?')[1]}`
 
   const addToCart = (product) => {
