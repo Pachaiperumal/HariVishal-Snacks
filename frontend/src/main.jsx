@@ -17,7 +17,7 @@ const upiApps = [
   { id: 'gpay', label: 'Google Pay', icon: 'G', packageName: 'com.google.android.apps.nbu.paisa.user' },
   { id: 'phonepe', label: 'PhonePe', icon: 'पे', packageName: 'com.phonepe.app' },
   { id: 'paytm', label: 'Paytm', icon: 'P', packageName: 'net.one97.paytm' },
-  { id: 'supermoney', label: 'Super Money', icon: 'S', scheme: 'supermoney' },
+  { id: 'supermoney', label: 'Super Money', icon: 'super.money', scheme: 'supermoney' },
   { id: 'other', label: 'Others', icon: '+', chooser: true },
 ]
 
